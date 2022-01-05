@@ -1,6 +1,7 @@
 ﻿using DirectList.Data;
 using DirectList.Models;
 using DirectList.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,22 +22,58 @@ namespace DirectList.Areas.admin.Controllers
         }
         public IActionResult Index()
         {
-            List<MenuToRestaurant> menuToRestaurant = _context.MenuToRestaurants.Include(mt => mt.Menu).ToList();
-            List<Restaurant> restaurants = _context.Restaurants.ToList();
-
-            VmMenu model = new VmMenu()
-            {
-                Restaurants = restaurants,
-                MenuToRestaurants = menuToRestaurant
-            };
-            return View(model);
-           
+            return View(_context.Menus.ToList());
         }
         public IActionResult Create()
         {
-            ViewBag.Menu = _context.Menus.ToList();
-            ViewBag.Restaurants = _context.Restaurants.ToList();
+
             return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Menu model)
+        {
+            _context.Menus.Add(model);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+        public IActionResult Update(int? id)
+        {
+            Menu model = _context.Menus.Find(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Update(Menu model)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Menus.Update(model);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+
+            return View(model);
+        }
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                ModelState.AddModelError("", "Id can not be null");
+                return RedirectToAction("Index");
+            }
+
+            Menu menu = _context.Menus.Find(id);
+            if (menu == null)
+            {
+                ModelState.AddModelError("", "Data can not be null");
+                return RedirectToAction("Index");
+            }
+            _context.Menus.Remove(menu);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+
         }
     }
 }

@@ -40,9 +40,31 @@ namespace DirectList.Controllers
 
             return View(model);
         }
-        public IActionResult Details()
+        public async Task<IActionResult> Detail(int? id)
+        {
+            Setting setting = await _context.Settings.FirstOrDefaultAsync();
+            List<Social> socials = await _context.Socials.ToListAsync();
+            Restaurant restaurant = await _context.Restaurants
+                                                            .Include(ri => ri.RestaurantImages)
+                                                            .Include(tr => tr.TagToRestaurants).ThenInclude(t => t.Tag)
+                                                            .Include(fr => fr.FeatureToRestaurants).ThenInclude(f => f.Feature)
+                                                            .Include(mr => mr.MenuToRestaurants).ThenInclude(m => m.Menu)
+                                                            .Include(a => a.RestaurantManagers)
+                                                            .FirstOrDefaultAsync(i => i.Id == id);
+            VmBook vmRestBook = new VmBook()
+            {
+                Socials = socials,
+                Setting = setting,
+                Restaurant = restaurant
+            };
+
+            return View(vmRestBook);
+        }
+        public IActionResult Reservation()
         {
             return View();
         }
+     
+       
     }
 }

@@ -186,3 +186,17 @@ C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\n
 C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Areas\admin\Views\Tag\Index.cshtml.g.cs
 C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Areas\admin\Views\Tag\Create.cshtml.g.cs
 C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Areas\admin\Views\Tag\Update.cshtml.g.cs
+C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Areas\admin\Views\MenuToRestaurant\Index.cshtml.g.cs
+C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Areas\admin\Views\MenuToRestaurant\Create.cshtml.g.cs
+C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Areas\admin\Views\MenuToRestaurant\Update.cshtml.g.cs
+C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Areas\admin\Views\Menu\Index.cshtml.g.cs
+C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Areas\admin\Views\Menu\Create.cshtml.g.cs
+C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Areas\admin\Views\Menu\Update.cshtml.g.cs
+C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Areas\admin\Views\Restaurant\Index.cshtml.g.cs
+C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Areas\admin\Views\Restaurant\Create.cshtml.g.cs
+C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Areas\admin\Views\Restaurant\Update.cshtml.g.cs
+C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Areas\admin\Views\Manager\Index.cshtml.g.cs
+C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Areas\admin\Views\Manager\Create.cshtml.g.cs
+C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Areas\admin\Views\Manager\Update.cshtml.g.cs
+C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Views\Listing\Detail.cshtml.g.cs
+C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Views\BlogList\Comment.cshtml.g.cs

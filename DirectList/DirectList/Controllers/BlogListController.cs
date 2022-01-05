@@ -57,38 +57,19 @@ namespace DirectList.Controllers
         }
 
         [HttpPost]
-        public IActionResult Comment(VmBlog model)
+        public IActionResult Comment(BlogComment model)
         {
-
-
-           
-                Setting setting = _context.Settings.FirstOrDefault();
-                List<Social> socials = _context.Socials.ToList();
-                List<Blog> blogs = _context.Blogs.ToList();
-
-                if (ModelState.IsValid)
-                {
-                model.BlogComment.CreatedDate = DateTime.Now;
-                _context.BlogComments.Add(model.BlogComment);
+            if (ModelState.IsValid)
+            {
+                _context.BlogComments.Add(model);
                 _context.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-
-                VmBlog vmBlog1 = new VmBlog()
-                {
-                    Socials = socials,
-                    Setting = setting,
-                    BlogComment = model.BlogComment,
-                    Blog = model.Blog,
-                    Blogs = blogs
-                };
-
-
-
-                return View("Index", vmBlog1);
+                return RedirectToAction("Details", new { id = model.BlogId });
             }
 
+            return View(model);
         }
+
+    }
     }
 
   

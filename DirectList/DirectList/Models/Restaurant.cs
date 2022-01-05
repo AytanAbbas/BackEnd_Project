@@ -31,6 +31,21 @@ namespace DirectList.Models
         [MaxLength(500)]
         public string LocationNote { get; set; }
         public DateTime CreatedDate { get; set; }
+        [NotMapped]
+        public List<IFormFile> ImageFiles { get; set; }
+        [NotMapped]
+        public List<int> Tags { get; set; }
+
+        [NotMapped]
+        public List<int> Features { get; set; }
+        [NotMapped]
+        public List<int> TagToRestaurantId { get; set; }
+        [NotMapped]
+        public List<int> MenuToRestaurantId { get; set; }
+
+        [NotMapped]
+        public List<int> FeatureToRestaurantId { get; set; }
+
         public List<MenuToRestaurant> MenuToRestaurants { get; set; }
         public List<RestaurantManager> RestaurantManagers { get; set; }
         public List<TagToRestaurant> TagToRestaurants { get; set; }
@@ -39,6 +54,5 @@ namespace DirectList.Models
         public List<Book> Books { get; set; }
         public List<RestaurantComment> RestaurantComments { get; set; }
        
-
     }
 }
