@@ -12,5 +12,10 @@ namespace DirectList.ViewModels
         public List<Vacation> Vacations { get; set; }
         public List<Blog> Blogs { get; set; }
         public List<Restaurant> Restaurants { get; set; }
+        public List<RestaurantImage> RestaurantImages { get; set; }
+        public RestaurantImage RestaurantImage { get; set; }
+        public VmSearch Search { get; set; }
+        public List<string> AddToCart { get; set; }
+
     }
 }

@@ -32,6 +32,7 @@ namespace DirectList
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
             services.AddSession();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

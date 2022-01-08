@@ -18,59 +18,73 @@ namespace DirectList.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public IActionResult Index(string Searchdata)
         {
-            VmBlog model = new();
+            VmBlog model = new VmBlog();
             model.Blogs = _context.Blogs.ToList();
-            model.Banner = _context.Banners.FirstOrDefault(b => b.Page == "blog Listing");
+            model.CustomUser = _context.CustomUsers.FirstOrDefault();
             model.Setting = _context.Settings.FirstOrDefault();
             model.Socials = _context.Socials.ToList();
+            model.Banner = _context.Banners.FirstOrDefault(b => b.Page.ToLower() == "blog Listing");
+            model.Blogs = _context.Blogs.Where(b => (Searchdata != null ? b.Title.ToLower().Contains(Searchdata.ToLower()) : true)).ToList();
             return View(model);
         }
         public IActionResult BlogDetail(int? id)
         {
             Blog blog = null;
-            List<Blog> blogs = _context.Blogs.Include(u => u.CustomUser).ToList();
             Setting setting = _context.Settings.FirstOrDefault();
             List<Social> socials = _context.Socials.ToList();
-            Banner banner = _context.Banners.FirstOrDefault(b => b.Page == "blog detail");
-            List<BlogComment> blogComments = _context.BlogComments.OrderByDescending(bc => bc.CreatedDate).Where(i => i.BlogId == id).ToList();
+            List<Blog> blogs = _context.Blogs.ToList();
+            CustomUser customUser = _context.CustomUsers.FirstOrDefault();
+            Banner banner = _context.Banners.FirstOrDefault(b => b.Page.ToLower() == "blog detail");
+            List<BlogComment> comments = _context.BlogComments.Where(i => i.BlogId == id).OrderByDescending(bc => bc.CreatedDate).ToList();
             if (id != null)
             {
                 blog = _context.Blogs.Find(id);
             }
 
-            VmBlog vmBlog = new VmBlog()
+            VmBlog model = new VmBlog()
             {
-                Blog = blog,
-                Blogs=blogs,
+                Blogs = blogs,
                 Socials = socials,
                 Setting = setting,
-                BlogComments = blogComments,
-                Banner = banner
+                Blog = blog,
+                CustomUser = customUser,
+                Banner = banner,
+                BlogComments = comments
             };
-            return View(vmBlog);
-        }
-        public IActionResult Comment()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Comment(BlogComment model)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.BlogComments.Add(model);
-                _context.SaveChanges();
-                return RedirectToAction("Details", new { id = model.BlogId });
-            }
-
             return View(model);
         }
+        [HttpPost]
+        public IActionResult Comment(VmBlog model)
+        {
+            Setting setting = _context.Settings.FirstOrDefault();
+            List<Social> socials = _context.Socials.ToList();
+            List<Blog> blogs = _context.Blogs.ToList();
 
+            if (ModelState.IsValid)
+            {
+                model.BlogComment.CreatedDate = DateTime.Now;
+                _context.BlogComments.Add(model.BlogComment);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            VmBlog vmBlog = new VmBlog()
+            {
+                Socials = socials,
+                Setting = setting,
+                BlogComment = model.BlogComment,
+                Blog = model.Blog,
+                Blogs = blogs
+            };
+
+
+
+            return View("Index", vmBlog);
+        }
     }
-    }
+}
 
   
    

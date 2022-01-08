@@ -1,6 +1,7 @@
 ﻿using DirectList.Data;
 using DirectList.Models;
 using DirectList.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,6 +12,8 @@ using System.Threading.Tasks;
 namespace DirectList.Areas.admin.Controllers
 {
     [Area("admin")]
+
+    [Authorize]
     public class MenuToRestaurantController : Controller
     {
         private readonly AppDbContext _context;

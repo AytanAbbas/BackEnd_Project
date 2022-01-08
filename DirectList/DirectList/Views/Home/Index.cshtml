@@ -22,20 +22,25 @@
             <div class="main-search-inner">
                 <h2 class="text-white display-2">Find Nearby Attractions</h2>
                 <h4 class="text-white">Expolore top-rated attractions, activities and more</h4>
-                <div class="main-search-input">
-                    <div class="main-search-input-item">
-                        <input type="text" placeholder="What are you looking for?" value="" />
+                <!-- Search -->
+                <div class="col-md-6 grid-full-width page-search mb-3" style=" max-width: 100%;">
+                    <div class="main-search-input mt-0">
+                        <form asp-controller="Listing" asp-action="Index" method="get" style="display: flex; justify-content: space-around;">
+
+                            <div class="col-lg-5 col-sm-6">
+                                <div class="form-group">
+                                    <input asp-for="@Model.Search.searchdata" placeholder="Restaurant Name" class="form-control" style="color:black;">
+                                </div>
+                            </div>
+                            <div class="col-lg-1 col-sm-6 text-right">
+                                <button type="submit" class="btn main-search-btn btn-radius btn-lg btn-primary text-white"><span class="btn-inner--text">Search</span></button>
+                            </div>
+                        </form>
+
+
                     </div>
-                    <div class="main-search-input-item location">
-                        <div id="autocomplete-container">
-                            <input id="autocomplete-input" type="text" placeholder="Location">
-                        </div>
-                        <a href="#"><i class="fa fa-map-marker"></i></a>
-                    </div>
-                    <a href="#" class="btn main-search-btn btn-radius btn-lg btn-white">
-                        <span class="btn-inner--text">Search</span>
-                    </a>
                 </div>
+                <!-- Search Section / End -->
             </div>
         </div>
         <!-- SVG separator -->
@@ -67,7 +72,7 @@
                             <div class="category-box">
                                 <div class="category-box-content">
                                     <h3>
-                                        <a asp-controller="Restourant" asp-action="RestaurantDetail" asp-route-Id="@place.Id" class="text-white">
+                                        <a asp-controller="Listing" asp-action="Detail" asp-route-Id="@place.Id" class="text-white">
                                             @place.Name
                                         </a>
                                     </h3>
@@ -91,7 +96,8 @@
                                         </small>
                                     </span>
                                 </div>
-                                <div class="category-box-background" style="background-image: url('assets/images/cat-img-2.jpg')">
+                                <div class="category-box-background" >
+                                    <img src="~/Uploads/@place.RestaurantImages.FirstOrDefault().Image" style="height: 100%;" alt="Alternate Text" />
                                 </div>
                             </div>
                         </div>
@@ -104,7 +110,7 @@
                             <div class="category-box">
                                 <div class="category-box-content">
                                     <h3>
-                                        <a asp-controller="Restourant" asp-action="RestaurantDetail" asp-route-Id="@place.Id" class="text-white">
+                                        <a asp-controller="Listing" asp-action="Detail" asp-route-Id="@place.Id" class="text-white">
                                             @place.Name
                                         </a>
                                     </h3>
@@ -187,86 +193,44 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="simple-slick-carousel dots-nav">
-                    <div class="carousel-item">
-                        <div class="category-box-container text-center">
-                            <div class="listing-item-container">
-                                <div class="listing-item text-center">
-                                    <div class="mostviewed-bg" style="background-image: url('assets/images/most-img-4.jpg')">
-                                        <div class="listing-item-content">
-                                            <div class="list-logo">
-                                                <a> <img src="assets/images/logo-1.png" width="80" height="80" alt="logo"></a>
+
+                    @foreach (var item in Model.Restaurants)
+                    {
+                        <div class="carousel-item">
+                            <div class="category-box-container text-center">
+                                <div class="listing-item-container">
+                                    <div class="listing-item text-center">
+                                        <div class="mostviewed-bg">
+                                            <img src="~/Uploads/@item.RestaurantImages.FirstOrDefault().Image" alt="Alternate Text" />
+                                            <div class="listing-item-content">
+                                                <div class="list-logo">
+                                                    <a> <img src="~/assets/images/logo-1.png" width="80" height="80" alt="logo"></a>
+                                                </div>
+
+                                                <h3><a asp-controller="Listing" asp-action="Index">@item.Name</a></h3>
+                                                <p class="mb-0"> <small>@item.Address</small></p>
+                                                <span text-uppercase">
+                                                    @if ((item.StartDate.Hour < DateTime.Now.Hour && item.StartDate.Minute <= DateTime.Now.Minute) && (item.EndDate.Hour > DateTime.Now.Hour && item.EndDate.Minute <= DateTime.Now.Minute))
+                                                    {
+                                                        <span class="badge badge-pill list-banner badge-success">Open</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge badge-pill list-banner badge-danger">Closed</span>
+                                                    }
+                                                </span>
                                             </div>
-                                            <span class="badge badge-pill badge-primary text-uppercase category-banner">Eat & Drink</span>
-                                            <h3><a href="JavaScript:Void(0);">Cafe Bar</a></h3>
-                                            <p class="mb-0"> <small>Wall Street, New York</small></p>
-                                            <span class="badge badge-pill badge-primary text-uppercase open-close-banner">Open</span>
+                                            @{
+                                                int id = item.Id;
+                                            }
+                                            <a asp-controller="Home" asp-action="AddToCart" asp-route-id="@id" class="round-pill like-banner d-block bg-primary @(Model.AddToCart!=null?Model.AddToCart.Any(a => a==id.ToString())?"myadded":"":"")"><i class="fa fa-heart-o"></i></a>
                                         </div>
-                                        <span class="round-pill like-banner d-block bg-primary"><i class="fa fa-heart-o"></i></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="category-box-container text-center">
-                            <div class="listing-item-container">
-                                <div class="listing-item text-center">
-                                    <div class="mostviewed-bg" style="background-image: url('assets/images/most-img-3.jpg')">
-                                        <div class="listing-item-content">
-                                            <div class="list-logo">
-                                                <a> <img src="assets/images/logo-2.png" width="80" height="80" alt="logo"></a>
-                                            </div>
-                                            <span class="badge badge-pill badge-primary text-uppercase category-banner">Concert</span>
-                                            <h3><a href="JavaScript:Void(0);">Milky Ducth</a></h3>
-                                            <p class="mb-0"> <small>MayLand Square, LA</small></p>
-                                            <span class="badge badge-pill badge-primary text-uppercase open-close-banner">Coming Soon</span>
-                                        </div>
-                                        <span class="round-pill like-banner d-block bg-primary"><i class="fa fa-heart-o"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="category-box-container text-center">
-                            <div class="listing-item-container">
-                                <div class="listing-item text-center">
-                                    <div class="mostviewed-bg" style="background-image: url('assets/images/most-img-2.jpg')">
-                                        <div class="listing-item-content">
-                                            <div class="list-logo">
-                                                <a> <img src="assets/images/logo-3.png" width="80" height="80" alt="list-logo"></a>
-                                            </div>
-                                            <span class="badge badge-pill badge-primary text-uppercase category-banner">Hotels</span>
-                                            <h3><a href="JavaScript:Void(0);">Maledy Hotels</a></h3>
-                                            <p class="mb-0"> <small>672, CreedWay, New York</small></p>
-                                            <span class="badge badge-pill badge-primary text-uppercase open-close-banner">Open</span>
-                                        </div>
-                                        <span class="round-pill like-banner d-block bg-primary"><i class="fa fa-heart-o"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="category-box-container text-center">
-                            <div class="listing-item-container">
-                                <div class="listing-item text-center">
-                                    <div class="mostviewed-bg" style="background-image: url('assets/images/most-img-1.jpg')">
-                                        <div class="listing-item-content">
-                                            <div class="list-logo">
-                                                <a> <img src="assets/images/logo-4.png" width="80" height="80" alt="list-logo"></a>
-                                            </div>
-                                            <span class="badge badge-pill badge-primary text-uppercase category-banner">Eat & Drink</span>
-                                            <h3><a href="JavaScript:Void(0);">Donuts Hub</a></h3>
-                                            <p class="mb-0"> <small>56,Hihu Pora, New Yorkk</small></p>
-                                            <span class="badge badge-pill badge-primary text-uppercase open-close-banner">Open</span>
-                                        </div>
-                                        <span class="round-pill like-banner d-block bg-primary"><i class="fa fa-heart-o"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    }
+                  
                 </div>
             </div>
         </div>
@@ -320,7 +284,7 @@
                                     <h5>@item.Title</h5>
                                     <p>@item.CreatedDate.ToString("MMMM dd,yyyy")</p>
                                     <p class="description mb-4">@(item.Content!=null && item.Content.Length>150? item.Content.Substring(0,140) + "..." : item.Content)</p>
-                                    <a class="btn btn-primary" href="JavaScript:Void(0);">Read More</a>
+                                    <a class="btn btn-primary" asp-controller="BlogList" asp-action="Index">Read More</a>
                                 </div>
                             </div>
                         </div>

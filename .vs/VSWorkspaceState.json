@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\DirectList",
+    "\\DirectList\\BackEnd_Project",
+    "\\DirectList\\BackEnd_Project\\DirectList",
+    "\\DirectList\\BackEnd_Project\\DirectList\\DirectList",
+    "\\DirectList\\BackEnd_Project\\DirectList\\DirectList\\wwwroot",
+    "\\DirectList\\BackEnd_Project\\DirectList\\DirectList\\wwwroot\\Area",
+    "\\DirectList\\BackEnd_Project\\DirectList\\DirectList\\wwwroot\\Area\\vendor",
+    "\\DirectList\\BackEnd_Project\\DirectList\\DirectList\\wwwroot\\Area\\vendor\\fontawesome-free",
+    "\\DirectList\\DirectList"
+  ],
+  "SelectedNode": "\\DirectList\\BackEnd_Project\\DirectList\\DirectList\\DirectList.csproj",
+  "PreviewInSolutionExplorer": false
+}

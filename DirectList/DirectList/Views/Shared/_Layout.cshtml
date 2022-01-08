@@ -1,4 +1,15 @@
-﻿@model VmLayout 
+﻿@model VmLayout
+@inject IHttpContextAccessor _httpContextAccesssor
+
+@{
+    string oldData = _httpContextAccesssor.HttpContext.Request.Cookies["cart"];
+    int BasketCount = 0;
+
+    if (!string.IsNullOrEmpty(oldData))
+    {
+        BasketCount = oldData.Split("-").Length;
+    }
+}
 < !doctype html >
 <html lang="en">
 
@@ -68,7 +79,18 @@
                                     <li>
                                         <a asp-controller="Contact" asp-action="Index">Contact</a>
                                     </li>
+                                    <a asp-controller="Home" asp-action="Cart">
+                                        <i class="fa fa-heart-o heart"></i>
 
+
+                                        @if (BasketCount != 0)
+                                        {
+                                            <span class="position-absolute  start-100 translate-middle badge badge-pill bg-danger">
+                                                <span>@BasketCount</span>
+                                            </span>
+                                        }
+
+                                    </a>
 
 
                                 </ul>

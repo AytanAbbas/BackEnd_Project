@@ -2,210 +2,155 @@
 @{
     ViewData["Title"] = "BlogDetail";
 }
-
 <div class="main-wrapper">
     <!--Title Bar -->
-    <partial name="_BannerPartial" model="@Model.Banner">
-        <!-- Content -->
-        <div class="content">
-            <div class="container">
-                <!-- Blog Posts -->
-                <div class="blog-page">
-                    <div class="row">
-                        <!-- Post Content -->
-                        <div class="col-lg-9 col-md-8 padding-right-30">
-                            <!-- Blog Post -->
-                            <div class="blog-post single-post">
-                                <!-- Img -->
-                                <img class="img-fluid" src="~/Uploads/@Model.Blog.Image
-                                 " alt="image">
-                                <!-- Content -->
-                                <div class="post-content">
-                                    <h3>@Model.Blog.Title</h3>
-                                    <ul class="post-meta">
-                                        <li>@Model.Blog.CreatedDate.ToString("MMMM dd, yyyy")</li>
-                                        <li><a>@Model.BlogComments.Count Comments</a></li>
-                                    </ul>
-                                    <p>
-                                        @Model.Blog.Content
-                                    </p>
+    <partial name="_BannerPartial" model="Model.Banner" />
 
-                                </div>
+    <!-- Content -->
+    <div class="content">
+        <div class="container">
+            <!-- Blog Posts -->
+            <div class="blog-page">
+                <div class="row">
+                    <!-- Post Content -->
+                    <div class="col-lg-9 col-md-8 padding-right-30">
+                        <!-- Blog Post -->
+                        <div class="blog-post single-post">
+                            <!-- Img -->
+                            <img class="img-fluid" src="~/Uploads/@Model.Blog.Image" alt="image">
+                            <!-- Content -->
+                            <div class="post-content">
+                                <h3>@Model.Blog.Title</h3>
+                                <ul class="post-meta">
+                                    <li>@Model.Blog.CreatedDate.ToString("MMMM dd,yyyy")</li>
+                                    <li><a>@Model.BlogComments.Count Comments</a></li>
+                                </ul>
+                                @Model.Blog.Content
                             </div>
-                            <!-- Blog Post / End -->
-                            <!-- About Author -->
-                            <div class="about-author">
-                                <img src="assets/images/thumb-4.jpg" alt="image" />
-                                <div class="about-description">
-                                    <h4>Ethan Moore</h4>
-                                    <p>Nullam ultricies, velit ut varius molestie, ante metus condimentum nisi, dignissim facilisis turpis ex in libero. Sed porta ante tortor, a pulvinar mi facilisis nec. Proin finibus dolor ac convallis congue.</p>
-                                </div>
+                        </div>
+                        <!-- Blog Post / End -->
+                        <!-- About Author -->
+                        <div class="about-author">
+                            <img src="~/assets/images/@Model.CustomUser.Image" alt="image" width="30" />
+
+                            <div class="about-description">
+                                <h4>@Model.CustomUser.Name</h4>
+                                <p>@Model.CustomUser.Text</p>
                             </div>
-                            <div class="margin-top-50"></div>
-                            <!-- Reviews -->
-                            <section class="comments">
-                                <h4 class="headline margin-bottom-35">Comments <span class="comments-amount">(@Model.BlogComments.Count)</span></h4>
-                                @foreach (var item in Model.BlogComments)
-                                {
-                                    <div class="row py-4 list-img-wrap">
-                                        <div class="col-md-2 list-img"><img class="img-fluid rounded-circle shadow-lg" src="~/assets/images/avatar-159236_960_720.webp" alt="image"></div>
-                                        <div class="col-md-10">
-                                            <h5 class="text-primary">@item.Name</h5>
-                                            <p>
-                                                @if (((DateTime.Now - item.CreatedDate).TotalSeconds / 60 / 60 / 24 / 30 / 12) >= 1)
-                                                {
-                                                    @((((DateTime.Now - item.CreatedDate).TotalSeconds / 60 / 60 / 24 / 30 / 12).ToString("##") + " year ago").ToString());
+                        </div>
+                        <div class="margin-top-50"></div>
+                        <!-- Reviews -->
+                        <section class="comments">
+                            <h4 class="headline margin-bottom-35">Comments <span class="comments-amount">(@Model.BlogComments.Count)</span></h4>
+                            @foreach (var item in Model.BlogComments)
+                            {
+                                <div class="row py-4 list-img-wrap">
+                                    <div class="col-md-2 list-img"></div>
+                                    <div class="col-md-10">
+                                        <h5 class="text-primary"> @item.Name </h5>
+                                        <p>
+                                            @if (((DateTime.Now - item.CreatedDate).TotalSeconds / 60 / 60 / 24) >= 1)
+                                            {@((((DateTime.Now - item.CreatedDate).TotalSeconds / 60 / 60 / 24).ToString("##") + " day(s) ago").ToString());
+                                            }
+                                            else
+                                            {
+                                                if (((DateTime.Now - item.CreatedDate).TotalSeconds / 60 / 60) >= 1)
+
+                                                { @((((DateTime.Now - item.CreatedDate).TotalSeconds / 60 / 60).ToString("##") + " hour(s) ago").ToString());
                                                 }
                                                 else
                                                 {
-                                                    @if (((DateTime.Now - item.CreatedDate).TotalSeconds / 60 / 60 / 24 / 30) >= 1)
-                                                    {
-                                                        @((((DateTime.Now - item.CreatedDate).TotalSeconds / 60 / 60 / 24 / 30).ToString("##") + " month ago").ToString());
+                                                    @if (((DateTime.Now - item.CreatedDate).TotalSeconds / 60) >= 1)
+                                                    {@((((DateTime.Now - item.CreatedDate).TotalSeconds / 60).ToString("##") + " minute(s) ago").ToString());
                                                     }
                                                     else
-                                                    {
-                                                        if (((DateTime.Now - item.CreatedDate).TotalSeconds / 60 / 60 / 24) >= 1)
-                                                        {
-                                                            @((((DateTime.Now - item.CreatedDate).TotalSeconds / 60 / 60 / 24).ToString("##") + " day ago").ToString());
-                                                        }
-                                                        else
-                                                        {
-                                                            if (((DateTime.Now - item.CreatedDate).TotalSeconds / 60 / 60) >= 1)
-                                                            {
-                                                                @((((DateTime.Now - item.CreatedDate).TotalSeconds / 60/60).ToString("##") + " hour ago").ToString());
-                                                            }
-                                                            else
-                                                            {
-                                                                @if (((DateTime.Now - item.CreatedDate).TotalSeconds / 60) >= 1)
-                                                                {
-                                                                    @((((DateTime.Now - item.CreatedDate).TotalSeconds / 60).ToString("##") + " minutes ago").ToString());
-                                                                }
-                                                                else
-                                                                {
-                                                                    @((((DateTime.Now - item.CreatedDate).TotalSeconds).ToString("##") + " seconds ago").ToString());
-                                                                }
-                                                            }
-                                                        }
+                                                    { @((((DateTime.Now - item.CreatedDate).TotalSeconds).ToString("##") + " second(s) ago").ToString());
                                                     }
                                                 }
-                                            </p>
-                                            <p>
-                                                @item.Content
-                                            </p>
-                                            <button class="btn btn-sm btn-primary" type="button">Reply</button>
-                                        </div>
-                                    </div>
-                                }
-
-
-                            </section>
-                            <div class="clearfix"></div>
-                            <!-- Add Comment -->
-                            <div id="add-review" class="add-review-box mt-4">
-                                <!-- Add Review -->
-                                <h3 class="listing-desc-headline mb-4">Add Review</h3>
-                                <!-- Review Comment -->
-                                <form id="add-comment" class="add-comment" asp-controller="BlogList" asp-action="Comment" method="post">
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <input asp-for="@Model.BlogComment.Name" placeholder="Name" class="form-control form-control-alternative">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <input asp-for="@Model.BlogComment.Name" placeholder="Email" class="form-control form-control-alternative">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <input asp-for="@Model.BlogComment.Subject" placeholder="Subject" class="form-control form-control-alternative">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <div class="form-group">
-                                                <textarea asp-for="@Model.BlogComment.Content" class="form-control form-control-alternative" placeholder="Comment" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <input type="hidden" asp-for="@Model.BlogComment.BlogId" value="@Model.Blog.Id" />
-                                    <button type="submit" class="mt-4 btn btn-primary">Submit Comment</button>
-                                    <div class="clearfix"></div>
-                                </form>
-                            </div>
-                            <!-- Add Review Box / End -->
-                        </div>
-                        <!-- Content / End -->
-                        <!-- Widgets -->
-                        <div class="col-lg-3 col-md-4">
-                            <div class="sidebar right">
-                                <!-- Widget -->
-                                <div class="widget">
-                                    <h3 class="margin-top-0 margin-bottom-25">Search Blog</h3>
-                                    <div class="form-group">
-                                        <div class="input-group mb-4">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fa fa-search"></i></span>
-                                            </div>
-                                            <input class="form-control" placeholder="Search" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Widget / End -->
-                                <!-- Widget -->
-                                <div class="widget mb-4">
-                                    <h3>Popular Posts</h3>
-                                    <ul class="widget-tabs">
-                                        <!-- Post #1 -->
-                                        <li>
-                                            @foreach (var item in Model.Blogs.OrderByDescending(o => o.CreatedDate).Take(3))
-                                            {
-                                                <div class="widget-content">
-                                                    <div class="widget-thumb">
-                                                        <a href="#"><img src="~/Uploads/@item.Image" alt="image"></a>
-                                                    </div>
-                                                    <div class="widget-text">
-                                                        <h5><a href="#">@item.Title </a></h5>
-                                                        <span>@item.CreatedDate.ToString("MMMM dd, yyyy")</span>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </div>
                                             }
-
-                                        </li>
-
-                                    </ul>
-                                </div>
-                                <!-- Widget / End-->
-                                <!-- Widget -->
-                                <div class="widget margin-top-40">
-                                    <h3 class="margin-bottom-25">Follow Us</h3>
-                                    <div class=" btn-wrapper">
-                                        <a target="_blank" href="https://twitter.com/" class="btn btn-neutral btn-icon-only btn-twitter btn-round btn-lg" data-toggle="tooltip" data-original-title="Follow us">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                        <a target="_blank" href="https://www.facebook.com/" class="btn btn-neutral btn-icon-only btn-facebook btn-round btn-lg" data-toggle="tooltip" data-original-title="Like us">
-                                            <i class="fa fa-facebook-square"></i>
-                                        </a>
-                                        <a target="_blank" href="https://dribbble.com/" class="btn btn-neutral btn-icon-only btn-dribbble btn-lg btn-round" data-toggle="tooltip" data-original-title="Follow us">
-                                            <i class="fa fa-dribbble"></i>
-                                        </a>
-                                        <a target="_blank" href="https://github.com/" class="btn btn-neutral btn-icon-only btn-github btn-round btn-lg" data-toggle="tooltip" data-original-title="Star on Github">
-                                            <i class="fa fa-github"></i>
-                                        </a>
+                                        </p>
+                                        <p>
+                                            @item.Content
+                                        </p>
                                     </div>
                                 </div>
-                                <!-- Widget / End-->
+                            }
+                        </section>
+                        <div class="clearfix"></div>
+                        <!-- Add Comment -->
+                        <div id="add-review" class="add-review-box mt-4">
+                            <!-- Add Review -->
+                            <h3 class="listing-desc-headline mb-4">Add Review</h3>
+                            <!-- Review Comment -->
+                            <form id="add-comment" class="add-comment" asp-controller="BlogList" asp-action="Comment" method="post">
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input asp-for="@Model.BlogComment.Name" placeholder="Name" class="form-control form-control-alternative">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input asp-for="@Model.BlogComment.Email" placeholder="Email" class="form-control form-control-alternative">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input asp-for="@Model.BlogComment.Subject" placeholder="Subject" class="form-control form-control-alternative">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div class="form-group">
+                                            <textarea asp-for="@Model.BlogComment.Content" class="form-control form-control-alternative" placeholder="Comment" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <input type="hidden" asp-for="@Model.BlogComment.BlogId" value="@Model.Blog.Id" />
+                                <button class="mt-4 btn btn-primary" type="submit">Submit Comment</button>
                                 <div class="clearfix"></div>
-                                <div class="margin-bottom-40"></div>
+                            </form>
+                        </div>
+                        <!-- Add Review Box / End -->
+                    </div>
+                    <!-- Content / End -->
+                    <!-- Widgets -->
+                    <div class="col-lg-3 col-md-4">
+                        <div class="sidebar right">
+                           
+                            <div class="widget mb-4">
+                                <h3>My Posts</h3>
+                                <ul class="widget-tabs">
+                                    @foreach (var item in Model.Blogs)
+                                    {
+                                        <li>
+                                            <div class="widget-content">
+                                                <div class="widget-thumb">
+                                                    <a asp-controller="BlogList" asp-action="BlogDetail" asp-route-id="@item.Id"><img src="~/Uploads/@item.Image" alt="image"></a>
+                                                </div>
+                                                <div class="widget-text">
+                                                    <h5><a asp-controller="BlogList" asp-action="BlogDetail" asp-route-id="@item.Id">@item.Title</a></h5>
+                                                    <span>@item.CreatedDate.ToString("MMMM dd, yyyy")</span>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
                             </div>
+                            <!-- Widget / End-->
+                            <!-- Widget -->
+                           
+                            <!-- Widget / End-->
+                            <div class="clearfix"></div>
+                            <div class="margin-bottom-40"></div>
                         </div>
                     </div>
-                    <!-- Sidebar / End -->
                 </div>
+                <!-- Sidebar / End -->
             </div>
         </div>
+    </div>
 </div>
 

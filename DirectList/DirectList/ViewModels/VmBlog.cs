@@ -13,6 +13,7 @@ namespace DirectList.ViewModels
         public List<BlogComment> BlogComments { get; set; }
         public BlogComment BlogComment { get; set; }
         public Banner Banner { get; set; }
-      
+        public CustomUser CustomUser { get; set; }
+
     }
 }

@@ -200,3 +200,4 @@ C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\n
 C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Areas\admin\Views\Manager\Update.cshtml.g.cs
 C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Views\Listing\Detail.cshtml.g.cs
 C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Views\BlogList\Comment.cshtml.g.cs
+C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\obj\Debug\net5.0\Razor\Views\Home\Cart.cshtml.g.cs

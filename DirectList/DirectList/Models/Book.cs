@@ -22,5 +22,6 @@ namespace DirectList.Models
         [ForeignKey("Restaurant")]
         public int RestaurantId { get; set; }
         public Restaurant Restaurant { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

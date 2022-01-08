@@ -32,7 +32,7 @@ namespace DirectList.Models
         public string LocationNote { get; set; }
         public DateTime CreatedDate { get; set; }
         [NotMapped]
-        public List<IFormFile> ImageFiles { get; set; }
+        public List<IFormFile> RestaurantImageFile { get; set; }
         [NotMapped]
         public List<int> Tags { get; set; }
 

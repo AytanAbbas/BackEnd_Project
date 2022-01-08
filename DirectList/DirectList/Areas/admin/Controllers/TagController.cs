@@ -1,5 +1,6 @@
 ﻿using DirectList.Data;
 using DirectList.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 namespace DirectList.Areas.admin.Controllers
 {
     [Area("admin")]
+    [Authorize]
     public class TagController : Controller
     {
         private readonly AppDbContext _context;

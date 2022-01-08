@@ -1,6 +1,7 @@
 ﻿using DirectList.Data;
 using DirectList.Models;
 using DirectList.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace DirectList.Areas.admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly AppDbContext _context;

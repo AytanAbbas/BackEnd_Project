@@ -33,8 +33,15 @@ using DirectList.ViewModels;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\HP\Desktop\DirectList-BackEndrProject\DirectList\DirectList\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Http;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"cfe973d1b68977a335ee46f90133e7a76d4f38db", @"/Views/BlogList/Comment.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"cac4dbdf44387914202811f0197bdc701c163916", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"fd3807eaf9342c96066a2b626637b747c1bdb752", @"/Views/_ViewImports.cshtml")]
     public class Views_BlogList_Comment : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
